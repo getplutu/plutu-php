@@ -1,0 +1,8 @@
+.phpunit
+.phpunit.result.cache
+.phpunit.cache
+coverage/
+vendor/
+composer.lock
+*.bak
+.DS_Store
