@@ -130,3 +130,4 @@ The following integrations are fully supported and maintained by the Plutu team.
 ## License
 
 The Plutu PHP package is open-source software licensed under the [MIT](https://opensource.org/licenses/MIT) License.
+
