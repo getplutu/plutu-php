@@ -20,7 +20,7 @@ abstract class PlutuService
     /**
      * @var string The base URL for the Plutu API.
      */
-    protected string $baseUrl = 'https://api.dev.plutus.ly/api';
+    protected string $baseUrl = 'https://api.plutus.ly/api';
 
     /**
      * @var string The version for the Plutu API.
