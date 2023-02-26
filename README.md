@@ -8,9 +8,7 @@
 
 [![Latest Stable Version](https://poser.pugx.org/plutu/plutu-php/v/stable.svg)](https://packagist.org/packages/plutu/plutu-php)
 [![Version](http://poser.pugx.org/plutu/plutu-php/version)](https://packagist.org/packages/plutu/plutu-php)
-[![PHP Version Require](http://poser.pugx.org/plutu/plutu-php/require/php)](https://packagist.org/packages/plutu/plutu-php)
-[![Total Downloads](https://poser.pugx.org/plutu/plutu-php/downloads.svg)](https://packagist.org/packages/plutu/plutu-php)
-[![Monthly Downloads](https://poser.pugx.org/plutu/plutu-php/d/monthly)](https://packagist.org/packages/plutu/plutu-php)
+[![Total Downloads](http://poser.pugx.org/plutu/plutu-php/downloads)](https://packagist.org/packages/plutu/plutu-php)
 [![License](https://poser.pugx.org/plutu/plutu-php/license)](https://packagist.org/packages/plutu/plutu-php)
 
 The Plutu PHP package provides a streamlined integration of Plutu's services into PHP projects. It offers a generic interface that enables easy interaction with the Plutu API and services.
