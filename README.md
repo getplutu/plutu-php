@@ -6,7 +6,6 @@
 
 # Official Plutu SDK for PHP
 
-[![Latest Stable Version](https://poser.pugx.org/plutu/plutu-php/v/stable.svg)](https://packagist.org/packages/plutu/plutu-php)
 [![Version](http://poser.pugx.org/plutu/plutu-php/version)](https://packagist.org/packages/plutu/plutu-php)
 [![Total Downloads](http://poser.pugx.org/plutu/plutu-php/downloads)](https://packagist.org/packages/plutu/plutu-php)
 [![License](https://poser.pugx.org/plutu/plutu-php/license)](https://packagist.org/packages/plutu/plutu-php)
@@ -49,6 +48,7 @@ use Plutu\Services\PlutuAdfali;
 use Plutu\Services\PlutuSadad;
 use Plutu\Services\PlutuLocalBankCards;
 use Plutu\Services\PlutuTlync;
+use Plutu\Services\PlutuMpgs;
 
 // Adfali service
 $api = new PlutuAdfali;
@@ -61,6 +61,9 @@ $api = new PlutuLocalBankCards;
 $api->setCredentials('api_key', 'access_token', 'secret_key');
 // Tlync service
 $api = new PlutuTlync;
+$api->setCredentials('api_key', 'access_token', 'secret_key');
+// MPGS service
+$api = new PlutuMpgs;
 $api->setCredentials('api_key', 'access_token', 'secret_key');
 ```
 
@@ -110,11 +113,14 @@ Each example includes code snippets with explanations, as well as a link to the 
         - [Confirm Process (Pay)](https://github.com/getplutu/plutu-php/blob/main/examples.md#confirm-process-pay-1)
     - [Local Bank Cards Payment Service](https://github.com/getplutu/plutu-php/blob/main/examples.md#local-bank-cards-payment-service)
         - [Confirm (Pay)](https://github.com/getplutu/plutu-php/blob/main/examples.md#confirm-pay)
-        - [Callback Handler](https://github.com/getplutu/plutu-php/blob/main/examples.md#Callback-handler)
+        - [Callback Handler](https://github.com/getplutu/plutu-php/blob/main/examples.md#callback-handler)
     - [T-Lync Payment Service](https://github.com/getplutu/plutu-php/blob/main/examples.md#t-lync-payment-service)
         - [Confirm (Pay)](https://github.com/getplutu/plutu-php/blob/main/examples.md#confirm-pay-1)
         - [Callback Handler](https://github.com/getplutu/plutu-php/blob/main/examples.md#callback-handler-1)
         - [Return Handler](https://github.com/getplutu/plutu-php/blob/main/examples.md#return-handler)
+    - [MPGS Payment Service](https://github.com/getplutu/plutu-php/blob/main/examples.md#mpgs-payment-service)
+        - [Confirm (Pay)](https://github.com/getplutu/plutu-php/blob/main/examples.md#confirm-pay-2)
+        - [Callback Handler](https://github.com/getplutu/plutu-php/blob/main/examples.md#callback-handler-2)
 - [Exceptions and Error Handling](https://github.com/getplutu/plutu-php/blob/main/examples.md#exceptions-and-error-handling)
 
 ## Official integrations
