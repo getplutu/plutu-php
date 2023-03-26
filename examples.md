@@ -20,6 +20,9 @@ This document contains examples of how to use the Plutu PHP package to integrate
         - [Confirm (Pay)](#confirm-pay-1)
         - [Callback Handler](#callback-handler-1)
         - [Return Handler](#return-handler)
+    - [MPGS Payment Service](#mpgs-payment-service)
+        - [Confirm (Pay)](#confirm-pay-2)
+        - [Callback Handler](#callback-handler-2)
 - [Exceptions and Error Handling](#exceptions-and-error-handling)
 
 ### Usage
@@ -34,7 +37,7 @@ require_once __DIR__ . '/vendor/autoload.php';
 
 ### Initialization
 
-Plutu PHP package provides several payment services, including `PlutuAdfali`, `PlutuSadad`, `PlutuLocalBankCards`, and `PlutuTlync`. To use a payment service, include the corresponding service class in your PHP file using the use statement:
+Plutu PHP package provides several payment services, including `PlutuAdfali`, `PlutuSadad`, `PlutuLocalBankCards`, `PlutuTlync`, and `PlutuMpgs`. To use a payment service, include the corresponding service class in your PHP file using the use statement:
 
 
 ```php
@@ -42,6 +45,7 @@ use Plutu\Services\PlutuAdfali;
 use Plutu\Services\PlutuSadad;
 use Plutu\Services\PlutuLocalBankCards;
 use Plutu\Services\PlutuTlync;
+use Plutu\Services\PlutuMpgs;
 
 ```
 
@@ -63,7 +67,7 @@ $api->setSecretKey('secret_key');
 
 ## Services
 
-To utilize Plutu's payment services, including `PlutuAdfali`, `PlutuSadad`, `PlutuLocalBankCards`, and `PlutuTlync`, please refer to the following sections for detailed PHP examples and explanations. These examples will assist you in integrating the services seamlessly into your applications
+To utilize Plutu's payment services, including `PlutuAdfali`, `PlutuSadad`, `PlutuLocalBankCards`, `PlutuTlync`, and `PlutuMpgs`, please refer to the following sections for detailed PHP examples and explanations. These examples will assist you in integrating the services seamlessly into your applications
 
 ---
 
@@ -340,7 +344,7 @@ try {
 
 #### Callback Handler
 
-Once the payment is completed or cancelled on Plutu, the user will be redirected to the ```return_url``` that you provided during the confirm step. This redirect will result in a GET request, and the returned data can be handled using the ```$_GET``` superglobal variable. It is important to handle this callback data to update the order or invoice payment status in your system.
+Once the payment is completed or cancelled, the user will be redirected to the ```return_url``` that you provided during the confirm step. This redirect will result in a GET request, and the returned data can be handled using the ```$_GET``` superglobal variable. It is important to handle this callback data to update the order or invoice payment status in your system.
 
 
 ```php
@@ -507,6 +511,109 @@ try {
     // Get all parameters
     // @see https://docs.plutu.ly/api-documentation/payments/t-lync#return-handler
     $callbackParameters = $callback->getParameters();
+
+// Handle exceptions that may be thrown during the execution of the code
+// The following are the expected exceptions that may be thrown:
+// Check the "Handle Exceptions and Errors" section for more details
+// 
+// InvalidSecretKeyException,
+// InvalidCallbackHashException
+} catch (\Exception $e) {
+    $exception = $e->getMessage();
+}
+```
+
+---
+
+### MPGS Payment Service
+
+The MPGS Service enables the initiation of payment processes through the use of Mastercard payment gateway services.
+
+#### Confirm (Pay)
+
+You can use the confirm method of the PlutuMpgs class to initiate this payment process.
+
+| Parameter    | Type   | Description                                                                              |
+|--------------|--------|------------------------------------------------------------------------------------------|
+| `$amount`    | float  | The amount of the transaction.                                                           |
+| `$invoiceNo` | string | Invoice or order number associated with the transaction, containing only alphanumeric characters, periods, dashes, and underscores..                                 |
+| `$returnUrl` | string | The callback URL that the transaction will redirect to after completion or cancellation. |
+
+
+```php
+$amount = 5.0; // amount in float format
+$invoiceNo = 'inv-12345'; // invoice number
+$returnUrl = 'https://example.com/callback/handler'; // the url to handle the callback from plutu
+
+try {
+
+    $api = new PlutuMpgs;
+    $api->setCredentials('api_key', 'access_token', 'secret_key');
+    $apiResponse = $api->confirm($amount, $invoiceNo, $returnUrl);
+
+    if ($apiResponse->getOriginalResponse()->isSuccessful()) {
+
+        // Redirect URL for Plutu checkout page
+        $redirectUrl = $apiResponse->getRedirectUrl();
+
+        // You should rediect the customer to payment checkout page
+        // header("location: " . $redirectUrl);
+
+    } elseif ($apiResponse->getOriginalResponse()->hasError()) {
+
+        // Possible errors from Plutu API
+        // @see https://docs.plutu.ly/api-documentation/errors Plutu API Error Documentation
+        $errorCode = $apiResponse->getOriginalResponse()->getErrorCode();
+        $errorMessage = $apiResponse->getOriginalResponse()->getErrorMessage();
+        $statusCode = $apiResponse->getOriginalResponse()->getStatusCode();
+        $responseData = $apiResponse->getOriginalResponse()->getBody();
+
+    }
+
+// Handle exceptions that may be thrown during the execution of the code
+// The following are the expected exceptions that may be thrown:
+// Check the "Handle Exceptions and Errors" section for more details
+// 
+// InvalidAccessTokenException, InvalidApiKeyException, InvalidSecretKeyException,
+// InvalidAmountException, InvalidInvoiceNoException, InvalidReturnUrlException
+} catch (\Exception $e) {
+    $exception = $e->getMessage();
+}
+
+```
+
+#### Callback Handler
+
+Once the payment is completed or cancelled, the user will be redirected to the ```return_url``` that you provided during the confirm step. This redirect will result in a GET request, and the returned data can be handled using the ```$_GET``` superglobal variable. It is important to handle this callback data to update the order or invoice payment status in your system.
+
+
+```php
+$parameters = $_GET;
+
+try {
+    
+    $api = new PlutuMpgs;
+    $api->setSecretKey('secret_key');
+    // OR
+    //$api->setCredentials(null, null, 'secret_key');
+    $callback = $api->callbackHandler($parameters);
+
+    // Get all parameters
+    // @see https://docs.plutu.ly/api-documentation/payments/mpgs#callback-handler
+    $callbackParameters = $callback->getParameters();
+
+    // The transaction has been completed and approved
+    if($callback->isApprovedTransaction()){
+        // Get transaction ID
+        $transactionId = $callback->getParameter('transaction_id');
+        // Get currency
+        $currency = $callback->getParameter('currency');
+    }
+
+    // The end-user canceled the payment page
+    if($callback->isCanceledTransaction()){
+        // Canceled tranasction
+    }
 
 // Handle exceptions that may be thrown during the execution of the code
 // The following are the expected exceptions that may be thrown:
