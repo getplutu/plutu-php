@@ -25,7 +25,7 @@ class PlutuApiResponse
     /**
      * Get status code from response.
      *
-     * @return boolean
+     * @return int
      */
     private function getStatusCodeFromResponse(object $response): int
     {
@@ -61,7 +61,7 @@ class PlutuApiResponse
     /**
      * Gets the data from the response.
      *
-     * @return array The data from the response.
+     * @return object The data from the response.
      */
     public function getBody(): object
     {
@@ -107,7 +107,7 @@ class PlutuApiResponse
     /**
      * Get the errors from the response.
      *
-     * @return array|null
+     * @return ?array<string>
      */
     public function getErrors(): ?array
     {
@@ -147,5 +147,4 @@ class PlutuApiResponse
 
         return null;
     }
-    
 }

@@ -5,14 +5,14 @@ namespace Plutu\Services\Responses\Callbacks;
 class PlutuApiCallback
 {
     /**
-     * @var array The callback parameters.
+     * @var array<string> The callback parameters.
      */
     private array $parameters = [];
 
     /**
      * PlutuApiCallback constructor.
      *
-     * @param array $parameters The callback parameters.
+     * @param array<string> $parameters The callback parameters.
      */
     public function __construct(array $parameters)
     {
@@ -33,7 +33,7 @@ class PlutuApiCallback
     /**
      * Get all the callback parameters.
      *
-     * @return array An array of all the callback parameters.
+     * @return array<string> An array of all the callback parameters.
      */
     public function getParameters(): array
     {

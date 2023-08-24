@@ -20,9 +20,9 @@ class HttpGuzzleClient implements HttpClientInterface
 
     /**
      * Constructor for HttpGuzzleClient.
-     * 
+     *
      * @param Client|null $client
-     * @param array  $config
+     * @param array<string>  $config
      * @param HttpGuzzleExceptionHandler|null $exceptionHandler
      */
     public function __construct(?Client $client = null, array $config = [], ?HttpGuzzleExceptionHandler $exceptionHandler = null)
@@ -33,11 +33,11 @@ class HttpGuzzleClient implements HttpClientInterface
 
     /**
      * Http Request
-     * 
+     *
      * @param  string $url
-     * @param  string $method 
-     * @param  array  $parameters
-     * @param  array  $headers
+     * @param  string $method
+     * @param  array<string>  $parameters
+     * @param  array<string>  $headers
      * @return object
      */
     public function request(string $url, string $method, array $parameters = [], array $headers = []): object
@@ -50,5 +50,4 @@ class HttpGuzzleClient implements HttpClientInterface
         }
         return json_decode($responseBody);
     }
-
 }

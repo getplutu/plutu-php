@@ -46,7 +46,7 @@ trait ValidFakeDataTrait
      */
     protected function createValidFakeBirthYear(): int
     {
-        return (int) rand(1940, date('Y')-18);
+        return (int) rand(1940, (int) date('Y') - 18);
     }
 
     /**
@@ -62,7 +62,7 @@ trait ValidFakeDataTrait
     /**
      * Create a valid fake process Id.
      *
-     * @return float An amount.
+     * @return string An amount.
      */
     protected function createValidFakeProcessId(): string
     {
@@ -73,7 +73,7 @@ trait ValidFakeDataTrait
     /**
      * Create a valid fake OTP.
      *
-     * @return float An amount.
+     * @return string An amount.
      */
     protected function createValidFakeOTP(): string
     {
@@ -83,7 +83,7 @@ trait ValidFakeDataTrait
     /**
      * Create a valid fake invoice number.
      *
-     * @return float An amount.
+     * @return string An amount.
      */
     protected function createValidFakeInvoiceNumber(): string
     {

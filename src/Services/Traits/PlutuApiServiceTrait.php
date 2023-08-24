@@ -6,9 +6,9 @@ trait PlutuApiServiceTrait
 {
 
     /**
-     * Get api headers array
-     * 
-     * @return array
+     * Get the headers for the API request.
+     *
+     * @return array<string, string> The array of headers.
      */
     protected function getApiHeaders(): array
     {
@@ -21,12 +21,11 @@ trait PlutuApiServiceTrait
 
     /**
      * Get api URL
-     * 
+     *
      * @return string
      */
     protected function getApiUrl(string $action): string
     {
         return $this->baseUrl . '/' . $this->version . '/transaction/' . $this->paymentGateway . '/' . $action;
     }
-
 }

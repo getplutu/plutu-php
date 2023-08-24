@@ -26,7 +26,7 @@ class HttpGuzzleExceptionHandler
             $response = $this->buildError($e->getMessage(), 'BACKEND_ERROR');
         }
 
-        if (method_exists($e, 'hasResponse') && $e->hasResponse()) {
+        if ($e instanceof RequestException && method_exists($e, 'hasResponse') && $e->hasResponse()) {
             $response = $e->getResponse()->getBody();
         }
 

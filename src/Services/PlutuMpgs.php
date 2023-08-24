@@ -54,7 +54,7 @@ class PlutuMpgs extends PlutuService implements PlutuMpgsServiceInterface
     /**
      * Callback method for the payment gateway.
      *
-     * @param array $parameters The callback parameters.
+     * @param array<string> $parameters The callback parameters.
      *
      * @return PlutuApiMpgsCallback
      */
@@ -67,7 +67,5 @@ class PlutuMpgs extends PlutuService implements PlutuMpgsServiceInterface
         $this->checkValidCallbackHash($parameters, $data);
 
         return new PlutuApiMpgsCallback($parameters);
-        
     }
-
 }

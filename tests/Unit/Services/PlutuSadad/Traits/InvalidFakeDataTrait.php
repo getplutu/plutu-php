@@ -42,7 +42,7 @@ trait InvalidFakeDataTrait
     /**
      * Create a unvalid fake OTP.
      *
-     * @return float An amount.
+     * @return string An amount.
      */
     protected function createInvalidFakeOTP(): string
     {

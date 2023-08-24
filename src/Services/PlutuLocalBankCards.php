@@ -54,7 +54,7 @@ class PlutuLocalBankCards extends PlutuService implements PlutuLocalBankCardsSer
     /**
      * Callback method for the payment gateway.
      *
-     * @param array $parameters The callback parameters.
+     * @param array<string> $parameters The callback parameters.
      *
      * @return PlutuApiLocalBankCardsCallback
      */
@@ -67,7 +67,5 @@ class PlutuLocalBankCards extends PlutuService implements PlutuLocalBankCardsSer
         $this->checkValidCallbackHash($parameters, $data);
 
         return new PlutuApiLocalBankCardsCallback($parameters);
-        
     }
-
 }

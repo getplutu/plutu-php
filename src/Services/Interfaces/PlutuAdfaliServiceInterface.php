@@ -9,7 +9,8 @@ interface PlutuAdfaliServiceInterface
     /**
      * Verify a payment with the payment gateway.
      *
-     * @param array $parameters The payment parameters to verify.
+     * @param string $mobileNumber The mobile number of the customer.
+     * @param float $amount The amount to verify.
      *
      * @return PlutuAdfaliApiResponse.
      */
@@ -18,7 +19,11 @@ interface PlutuAdfaliServiceInterface
     /**
      * Confirm a payment with the payment gateway.
      *
-     * @param array $parameters The payment parameters to confirm.
+     * @param string $processId The process ID of the payment.
+     * @param string $code The code of the payment.
+     * @param float $amount The amount to confirm.
+     * @param string $invoiceNo The invoice number of the payment.
+     * @param string|null $customerIp The IP address of the customer (optional).
      *
      * @return PlutuAdfaliApiResponse.
      */

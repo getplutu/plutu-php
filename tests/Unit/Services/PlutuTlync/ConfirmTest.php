@@ -26,6 +26,9 @@ class ConfirmTest extends PlutuTest
 {
     use Traits\ValidFakeDataTrait, Traits\InvalidFakeDataTrait;
 
+    /**
+     * @var mixed
+     */
     protected $response;
 
     /**
@@ -43,7 +46,7 @@ class ConfirmTest extends PlutuTest
      * Test that the response throws an InvalidApiKeyException when an invalid api kye is provided.
      *
      * @return void
-     * 
+     *
      * @throws InvalidApiKeyException
      */
     public function testInvalidApiKeyThrowsException(): void
@@ -58,7 +61,7 @@ class ConfirmTest extends PlutuTest
      * Test that the response throws an InvalidAccessTokenException when an invalid access token is provided.
      *
      * @return void
-     * 
+     *
      * @throws InvalidAccessTokenException
      */
     public function testInvalidAccessTokenThrowsException(): void
@@ -73,7 +76,7 @@ class ConfirmTest extends PlutuTest
      * Test that the response throws an InvalidSecretKeyException when an invalid secret key is provided.
      *
      * @return void
-     * 
+     *
      * @throws InvalidSecretKeyException
      */
     public function testInvalidSecretKeyThrowsException(): void
@@ -88,7 +91,7 @@ class ConfirmTest extends PlutuTest
      * Test that the response throws an InvalidMobileNumberException when an invalid mobile number is provided.
      *
      * @return void
-     * 
+     *
      * @throws InvalidMobileNumberException
      */
     public function testInvalidMobileNumberThrowsException(): void
@@ -102,7 +105,7 @@ class ConfirmTest extends PlutuTest
      * Test that the response throws an InvalidInvoiceNoException when an invalid invoice number is provided.
      *
      * @return void
-     * 
+     *
      * @throws InvalidInvoiceNoException
      */
     public function testInvalidInvoiceNoThrowsException(): void
@@ -116,7 +119,7 @@ class ConfirmTest extends PlutuTest
      * Test that the response throws an InvalidReturnUrlException when an invalid return url is provided.
      *
      * @return void
-     * 
+     *
      * @throws InvalidReturnUrlException
      */
     public function testInvalidReturnUrlThrowsException(): void
@@ -130,7 +133,7 @@ class ConfirmTest extends PlutuTest
      * Test that the response throws an InvalidCallbackUrlException when an invalid return url is provided.
      *
      * @return void
-     * 
+     *
      * @throws InvalidCallbackUrlException
      */
     public function testInvalidCallbackUrlThrowsException(): void
@@ -151,7 +154,7 @@ class ConfirmTest extends PlutuTest
         $responseBody = $this->response->getOriginalResponse()->getBody();
         $keys = (array) json_decode(json_encode($responseBody), true);
 
-        $this->assertArrayHasKey('status', $keys);  
+        $this->assertArrayHasKey('status', $keys);
         $this->assertArrayHasKey('result', $keys);
         $this->assertArrayHasKey('redirect_url', $keys['result']);
     }
@@ -203,11 +206,11 @@ class ConfirmTest extends PlutuTest
 
     /**
      * Builds a request with provided credentials.
-     * 
+     *
      * @param mixed $apiKey      API key for authentication
      * @param mixed $accessToken Access token for authentication
      * @param mixed $secretKey   Secret API key for authentication
-     * 
+     *
      * @return void
      */
     private function tryTestWithCredentials(mixed $apiKey = '', mixed $accessToken = '', mixed $secretKey = ''): void
@@ -222,5 +225,4 @@ class ConfirmTest extends PlutuTest
         $api->setCredentials($apiKey, $accessToken, $secretKey);
         $this->response = $api->confirm($mobileNumber, $amount, $invoiceNo, $returnUrl, $callbackUrl);
     }
-
 }
