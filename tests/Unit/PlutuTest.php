@@ -19,7 +19,7 @@ class PlutuTest extends TestCase
      *
      * @var HttpClientInterface|\PHPUnit\Framework\MockObject\MockObject
      */
-    protected HttpClientInterface $httpClientMock;
+    protected $httpClientMock;
 
     /**
      * Set up the test case.
@@ -52,7 +52,7 @@ class PlutuTest extends TestCase
      * @param string $file The name of the test case file.
      * @param string $path The path of the expected response file.
      *
-     * @return array The expected parameters array.
+     * @return array<string> The expected parameters array.
      */
     protected function getTestParameters(string $file, string $path = __DIR__): array
     {

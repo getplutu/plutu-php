@@ -113,7 +113,7 @@ abstract class PlutuService
     /**
      * Send a call request to the Plutu API.
      *
-     * @param array $parameters The parameters for the API request.
+     * @param array<string> $parameters The parameters for the API request.
      * @param string $action The action to perform on the API request.
      *
      * @return PlutuApiResponse The response from the Plutu API.
@@ -132,10 +132,10 @@ abstract class PlutuService
     
     /**
      * Set HTTP Client
-     * 
-     * @param HttpClientInterface|null $httpClient
+     *
+     * @param ?HttpClientInterface $httpClient
      */
-    public function setHttpClient(HttpClientInterface $httpClient = null)
+    public function setHttpClient(?HttpClientInterface $httpClient = null): void
     {
         $this->httpClient = $httpClient ?: new HttpGuzzleClient();
     }

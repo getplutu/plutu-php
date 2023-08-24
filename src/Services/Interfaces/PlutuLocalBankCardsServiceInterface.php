@@ -23,9 +23,9 @@ interface PlutuLocalBankCardsServiceInterface
     /**
      * Handle the callback from the payment gateway.
      *
-     * @param array $parameters The request array containing the callback data.
+     * @param array<string> $parameters The request array containing the callback data.
      *
-     * @return array The payment confirmation data.
+     * @return PlutuApiLocalBankCardsCallback The payment confirmation data.
      */
     public function callbackHandler(array $parameters): PlutuApiLocalBankCardsCallback;
 }

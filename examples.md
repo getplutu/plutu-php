@@ -4,26 +4,28 @@ This document contains examples of how to use the Plutu PHP package to integrate
 
 ## Getting started
 
-- [Usage](#usage)
-- [Initialization](#initialization)
-- [Services](#services)
+- [Plutu PHP Examples](#plutu-php-examples)
+  - [Getting started](#getting-started)
+    - [Usage](#usage)
+    - [Initialization](#initialization)
+  - [Services](#services)
     - [Adfali Payment Service](#adfali-payment-service)
-        - [Verify Process (Send OTP)](#verify-process-send-otp)
-        - [Confirm Process (Pay)](#confirm-process-pay)
+      - [Verify Process (Send OTP)](#verify-process-send-otp)
+      - [Confirm Process (Pay)](#confirm-process-pay)
     - [Sadad Payment Service](#sadad-payment-service)
-        - [Verify Process (Send OTP)](#verify-process-send-otp-1)
-        - [Confirm Process (Pay)](#confirm-process-pay-1)
+      - [Verify Process (Send OTP)](#verify-process-send-otp-1)
+      - [Confirm Process (Pay)](#confirm-process-pay-1)
     - [Local Bank Cards Payment Service](#local-bank-cards-payment-service)
-        - [Confirm (Pay)](#confirm-pay)
-        - [Callback Handler](#Callback-handler)
+      - [Confirm (Pay)](#confirm-pay)
+      - [Callback Handler](#callback-handler)
     - [T-Lync Payment Service](#t-lync-payment-service)
-        - [Confirm (Pay)](#confirm-pay-1)
-        - [Callback Handler](#callback-handler-1)
-        - [Return Handler](#return-handler)
+      - [Confirm (Pay)](#confirm-pay-1)
+      - [Callback Handler](#callback-handler-1)
+      - [Return Handler](#return-handler)
     - [MPGS Payment Service](#mpgs-payment-service)
-        - [Confirm (Pay)](#confirm-pay-2)
-        - [Callback Handler](#callback-handler-2)
-- [Exceptions and Error Handling](#exceptions-and-error-handling)
+      - [Confirm (Pay)](#confirm-pay-2)
+      - [Callback Handler](#callback-handler-2)
+  - [Exceptions and Error Handling](#exceptions-and-error-handling)
 
 ### Usage
 
@@ -183,11 +185,11 @@ try {
 
 To initiate a payment process with Sadad, you need to send an OTP to the customer's mobile number. You can use the verify method of the PlutuSadad class to do this.
 
-| Parameter        | Type   | Description                                                                           |
-|------------------|--------|---------------------------------------------------------------------------------------|
-| `$mobileNumber`  | string | The customer's mobile number subscribed in Sadad service, in the format 091XXXXXXX.   |
-| `$birthYear`     | int    | The customer's birth year related to the mobile number.                               |
-| `$amount`        | float  | The amount of the transaction.                                                        |
+| Parameter        | Type   | Description                                                                                         |
+|------------------|--------|-----------------------------------------------------------------------------------------------------|
+| `$mobileNumber`  | string | The customer's mobile number subscribed in Sadad service, in the format 091XXXXXXX or 093XXXXXXX.   |
+| `$birthYear`     | int    | The customer's birth year related to the mobile number.                                             |
+| `$amount`        | float  | The amount of the transaction.                                                                      |
 
 ```php
 $mobileNumber = '090000000'; // Mobile number should start with 09
@@ -658,7 +660,7 @@ Here are the detailed descriptions for each exception that may occur while using
 | `InvalidAccessTokenException`     | This exception is thrown when the Access Token is missing and not configured.                                                      |
 | `InvalidApiKeyException`          | This exception is thrown when the API Key is missing and not configured.                                                           |
 | `InvalidSecretKeyException`       | This exception is thrown when the Secret Key is missing and not configured.                                                        |
-| `InvalidMobileNumberException`    | This could occur if the mobile number format is incorrect, Sadad number must be a valid number starting with `091` and the other services that require a mobile number must be a valid number starting with `09`. |
+| `InvalidMobileNumberException`    | This could occur if the mobile number format is incorrect, Sadad number must be a valid number starting with `091` or `093` and the other services that require a mobile number must be a valid number starting with `09`. |
 | `InvalidBirthYearException`       | This could occur if the year provided is not a valid year or not valid format and ensure it is in the correct format and within the minimum age limit.                                          |
 | `InvalidCodeException`            | If the One-Time Password (OTP) provided is incorrect. For Sadad service, the OTP must be a six-digit number, and for Adfali service, it must be a four-digit number.                              |
 | `InvalidAmountException`          | This could occur if the amount provided is negative, zero, or empty.                                                               |

@@ -21,6 +21,9 @@ class ReturnHandlerTest extends PlutuTest
 {
     use Traits\ValidFakeDataTrait, Traits\InvalidFakeDataTrait;
 
+    /**
+     * @var mixed
+     */
     protected $return;
 
     /**
@@ -37,7 +40,7 @@ class ReturnHandlerTest extends PlutuTest
      * Test that the return throws an InvalidSecretKeyException when an invalid secret key is provided.
      *
      * @return void
-     * 
+     *
      * @throws InvalidSecretKeyException
      */
     public function testInvalidSecretKeyThrowsException(): void
@@ -50,7 +53,7 @@ class ReturnHandlerTest extends PlutuTest
      * Test that the return throws an InvalidCallbackHashException when an invalid secret key is provided.
      *
      * @return void
-     * 
+     *
      * @throws InvalidCallbackHashException
      */
     public function testInvalidCallbackHashExceptionThrowsException(): void
@@ -61,7 +64,7 @@ class ReturnHandlerTest extends PlutuTest
 
     /**
      * Test that the return data has the expected transaction approved.
-     * 
+     *
      * @return void
      */
     public function testSuccessfulCallbackWithValidisApprovedTransaction(): void
@@ -73,13 +76,13 @@ class ReturnHandlerTest extends PlutuTest
 
     /**
      * Builds a request for return with provided credentials and parameters.
-     * 
-     * @param string $secretKey  Secret API key for authentication
-     * @param array  $parameters Array of data parameters for the request
-     * 
+     *
+     * @param mixed $secretKey  Secret API key for authentication
+     * @param array<string>  $parameters Array of data parameters for the request
+     *
      * @return void
      */
-    private function tryTestCallback(mixed $secretKey = '', ?array $parameters = null): void
+    private function tryTestCallback(mixed $secretKey, ?array $parameters = null): void
     {
         $secretKey = $secretKey ?? $this->createValidFakeSecretKey();
         $parameters = $parameters ?? $this->getTestParameters('return_payment_parameters', __DIR__);
@@ -87,5 +90,4 @@ class ReturnHandlerTest extends PlutuTest
         $api->setCredentials('api_key', 'access_token', $secretKey);
         $this->return = $api->returnHandler($parameters);
     }
-
 }

@@ -15,7 +15,7 @@ class PlutuTlync extends PlutuService implements PlutuTlyncServiceInterface
 
     /**
      * Confirm a payment with the payment gateway.
-     * 
+     *
      * @param string $mobileNumber The customer's mobile number.
      * @param float $amount The payment amount.
      * @param string $invoiceNo The invoice number.
@@ -24,7 +24,7 @@ class PlutuTlync extends PlutuService implements PlutuTlyncServiceInterface
      * @param string|null $customerIp The customer's IP address.
      * @param string|null $lang The language.
      *
-     * @return mixed The response from the payment gateway.
+     * @return PlutuTlyncApiResponse The response from the payment gateway.
      */
     public function confirm(string $mobileNumber, float $amount, string $invoiceNo, string $returnUrl, string $callbackUrl, ?string $customerIp = null, ?string $lang = null): PlutuTlyncApiResponse
     {
@@ -55,13 +55,12 @@ class PlutuTlync extends PlutuService implements PlutuTlyncServiceInterface
         $response = $this->call($parameters, 'confirm');
 
         return new PlutuTlyncApiResponse($response);
-
     }
 
     /**
      * Callback method for the payment gateway.
      *
-     * @param array $parameters The callback parameters.
+     * @param array<string> $parameters The callback parameters.
      *
      * @return PlutuApiTlyncCallback
      */
@@ -74,13 +73,12 @@ class PlutuTlync extends PlutuService implements PlutuTlyncServiceInterface
         $this->checkValidCallbackHash($parameters, $data);
 
         return new PlutuApiTlyncCallback($parameters);
-
     }
-    
+
     /**
      * Callback method for the payment gateway.
      *
-     * @param array $parameters The callback parameters.
+     * @param array<string> $parameters The callback parameters.
      *
      * @return PlutuApiTlyncCallback
      */
@@ -93,6 +91,5 @@ class PlutuTlync extends PlutuService implements PlutuTlyncServiceInterface
         $this->checkValidCallbackHash($parameters, $data);
 
         return new PlutuApiTlyncCallback($parameters);
-        
     }
 }

@@ -62,7 +62,7 @@ trait PlutuValidationTrait
      */
     protected function validateMobileNumber(string $mobileNumber): void
     {
-        if (!preg_match('/^09(1|2|4|5)[0-9]{7}/i', $mobileNumber)) {
+        if (!preg_match('/^09[1-6][0-9]{7}$/i', $mobileNumber)) {
             throw new InvalidMobileNumberException('Invalid mobile number format');
         }
     }
@@ -75,7 +75,7 @@ trait PlutuValidationTrait
      */
     protected function validateSadadMobileNumber(string $mobileNumber): void
     {
-        if (!preg_match('/^091[0-9]{7}/i', $mobileNumber)) {
+        if (!preg_match('/^09[13][0-9]{7}$/i', $mobileNumber)) {
             throw new InvalidMobileNumberException('Invalid mobile number format');
         }
     }
@@ -189,13 +189,13 @@ trait PlutuValidationTrait
     /**
      * Get the filtered callback parameters from the request.
      *
-     * @param Request $request The request object.
-     * @param array $parameters The parameters to include.
+     * @param array<string> $parameters The request parameters.
+     * @param array<string> $callbackParameters The parameters to include.
      * @return string The URL-encoded string parametersf.
      */
     protected function getCallbackParameters(array $parameters, array $callbackParameters = []): string
     {
-        return http_build_query(array_filter($parameters, function($k) use ($callbackParameters) {
+        return http_build_query(array_filter($parameters, function ($k) use ($callbackParameters) {
             return in_array($k, $callbackParameters);
         }, ARRAY_FILTER_USE_KEY));
     }
@@ -203,7 +203,7 @@ trait PlutuValidationTrait
     /**
      * Check the validity of the callback hash.
      *
-     * @param array  $parameters  The callback parameters.
+     * @param array<string>  $parameters  The callback parameters.
      * @param string $data        The callback data to hash.
      *
      * @throws InvalidCallbackHashException if the hash verification fails.
@@ -216,5 +216,4 @@ trait PlutuValidationTrait
             throw new InvalidCallbackHashException('Hash verification failed');
         }
     }
-
 }

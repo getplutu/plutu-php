@@ -82,7 +82,7 @@ trait ValidFakeDataTrait
     /**
      * Create a valid fake invoice number.
      *
-     * @return float An amount.
+     * @return string An amount.
      */
     protected function createValidFakeInvoiceNumber(): string
     {

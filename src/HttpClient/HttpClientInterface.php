@@ -10,8 +10,8 @@ interface HttpClientInterface
      *
      * @param string $url The request URL.
      * @param string $method The request method.
-     * @param array $parameters The request parameters.
-     * @param array $headers The request headers.
+     * @param array<string> $parameters The request parameters.
+     * @param array<string> $headers The request headers.
      *
      * @return object.
      */

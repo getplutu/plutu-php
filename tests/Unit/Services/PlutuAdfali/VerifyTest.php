@@ -22,6 +22,9 @@ class VerifyTest extends PlutuTest
 {
     use Traits\ValidFakeDataTrait, Traits\InvalidFakeDataTrait;
 
+    /**
+     * @var mixed
+     */
     protected $response;
 
     /**
@@ -39,7 +42,7 @@ class VerifyTest extends PlutuTest
      * Test that the response throws an InvalidApiKeyException when an invalid api kye is provided.
      *
      * @return void
-     * 
+     *
      * @throws InvalidApiKeyException
      */
     public function testInvalidApiKeyThrowsException(): void
@@ -53,7 +56,7 @@ class VerifyTest extends PlutuTest
      * Test that the response throws an InvalidAccessTokenException when an invalid access token is provided.
      *
      * @return void
-     * 
+     *
      * @throws InvalidAccessTokenException
      */
     public function testInvalidAccessTokenThrowsException(): void
@@ -67,7 +70,7 @@ class VerifyTest extends PlutuTest
      * Test that the response throws an InvalidMobileNumberException when an invalid mobile number is provided.
      *
      * @return void
-     * 
+     *
      * @throws InvalidMobileNumberException
      */
     public function testInvalidMobileNumberThrowsException(): void
@@ -89,8 +92,8 @@ class VerifyTest extends PlutuTest
         $responseBody = $this->response->getOriginalResponse()->getBody();
         $keys = (array) json_decode(json_encode($responseBody), true);
 
-        $this->assertArrayHasKey('status', $keys);  
-        $this->assertArrayHasKey('message', $keys); 
+        $this->assertArrayHasKey('status', $keys);
+        $this->assertArrayHasKey('message', $keys);
         $this->assertArrayHasKey('result', $keys);
         $this->assertArrayHasKey('process_id', $keys['result']);
         $this->assertArrayHasKey('amount', $keys['result']);
@@ -123,7 +126,7 @@ class VerifyTest extends PlutuTest
      * Builds a request to verify a Adfali payment.
      *
      * @param mixed $mobileNumber The mobile number associated with the payment, or null to use a valid fake number.
-     * @param imixed $amount The payment amount, or null to use a valid fake amount.
+     * @param mixed $amount The payment amount, or null to use a valid fake amount.
      * @return void
      */
     private function tryTestWithRequest(mixed $mobileNumber = null, mixed $amount = null): void
@@ -138,10 +141,10 @@ class VerifyTest extends PlutuTest
 
     /**
      * Builds a request with provided credentials.
-     * 
+     *
      * @param mixed $apiKey      API key for authentication
      * @param mixed $accessToken Access token for authentication
-     * 
+     *
      * @return void
      */
     private function tryTestWithCredentials(mixed $apiKey = '', mixed $accessToken = ''): void
@@ -153,5 +156,4 @@ class VerifyTest extends PlutuTest
         $api->setCredentials($apiKey, $accessToken);
         $this->response = $api->verify($mobileNumber, $amount);
     }
-
 }

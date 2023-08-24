@@ -24,7 +24,7 @@ interface PlutuTlyncServiceInterface
     /**
      * Handle the callback request from the payment gateway.
      *
-     * @param array $parameters The callback parameters.
+     * @param array<string> $parameters The callback parameters.
      *
      * @return PlutuApiTlyncCallback.
      */
@@ -33,10 +33,9 @@ interface PlutuTlyncServiceInterface
     /**
      * Handle the return request from the payment gateway.
      *
-     * @param array $parameters The callback parameters.
+     * @param array<string> $parameters The callback parameters.
      *
      * @return PlutuApiTlyncCallback.
      */
     public function returnHandler(array $parameters): PlutuApiTlyncCallback;
-
 }
