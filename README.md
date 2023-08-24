@@ -18,7 +18,7 @@ The Plutu PHP package provides a streamlined integration of Plutu's services int
 
 Before you can use the Plutu PHP package, you need to have a Plutu API key, access token, and secret key. You can obtain these from your [Plutu](https://plutu.ly) account dashboard.
 
-- PHP version 8.0 or higher
+- PHP version 8.1 or higher
 
 ### Official Documentation
 

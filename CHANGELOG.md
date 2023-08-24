@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.1.2](https://github.com/getplutu/plutu-php/compare/1.1.1...1.1.2) - 2023-08-24
+
+### Changed
+- Updated `README.md` file to accurately specify that PHP ^8.1 is required.
+
 ## [1.1.1](https://github.com/getplutu/plutu-php/compare/1.1.0...1.1.1) - 2023-08-24
 
 ### Improvements
